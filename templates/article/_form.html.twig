@@ -1,0 +1,10 @@
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {# {{ form_widget(form) }} #}
+        {{ form_row(form.Titre, {'attr':{'class':'form-control'}})}}
+        {{ form_row(form.Resume, {'attr':{'class':'form-control'}})}}
+        {{ form_row(form.Contenu, {'attr':{'class':'form-control'}})}}
+        {{ form_row(form.user, {'attr':{'class':'form-control'}})}}
+        {{ form_row(form.Image, {'attr':{'class':'form-control'}})}}
+        <button class="btn">{{ button_label|default("Crée l'article") }}</button>
+    {{ form_end(form) }}

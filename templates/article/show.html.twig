@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Resume</th>
+                <td>{{ article.Resume }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ article.Contenu }}</td>
+            </tr>
+            <tr>
+                <th>Creation</th>
+                <td>{{ article.Creation ? article.Creation|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ article.user }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ article.Image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div  class="liste">
+        <h3>liste des commentaire</h3>
+
+        {% for comment in comments %}
+            Posté par <i>{{comment.user}}</i> le {{ comment.createdAt ? comment.createdAt|date('d-m-Y')}} à {{ comment.createdAt ? comment.createdAt|date('H:i:s')}}
+            <p>
+                {{comment.contenu}}
+            </p>
+        {% endfor %}
+    </div>
+
+    {% if app.user %}
+    <div class="form">
+        {{ include('commentaire/_form.html.twig') }}
+    </div>
+    {% else %}
+        Vous devez être connecter pour ajouter un commentaire
+
+    {% endif %}
+
+<div>
+    <a href="{{ path('app_article_index') }}">back to list</a>
+</div>
+<div>
+    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+</div>
+    {{ include('article/_delete_form.html.twig') }}
+{% endblock %}
